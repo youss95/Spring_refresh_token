@@ -39,7 +39,7 @@ public class MemberTest {
             }
             memberRepository.save(member);
         }
-        
+
     }
 
     @Test
