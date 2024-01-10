@@ -1,5 +1,6 @@
 package com.example.amllapi.config;
 
+import com.example.amllapi.security.ApiLoginHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
@@ -32,6 +33,8 @@ public class CustomSecurityConfig {
 
         http.formLogin(config -> {
             config.loginPage("/api/member/lgoin");
+            config.successHandler(new ApiLoginHandler());
+            config.failureHandler(new ApiLoginHandler());
         });
         return http.build();
     }
