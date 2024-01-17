@@ -51,7 +51,7 @@ public class ApiLoginHandler implements AuthenticationSuccessHandler, Authentica
 
     }
 
-    private void showJsonContent(String str, HttpServletResponse response) throws IOException {
+    public void showJsonContent(String str, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
         printWriter.println(str);

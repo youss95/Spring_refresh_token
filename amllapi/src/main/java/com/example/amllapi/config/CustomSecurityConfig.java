@@ -1,6 +1,7 @@
 package com.example.amllapi.config;
 
 import com.example.amllapi.security.ApiLoginHandler;
+import com.example.amllapi.security.filter.JwtValidFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -36,6 +38,8 @@ public class CustomSecurityConfig {
             config.successHandler(new ApiLoginHandler());
             config.failureHandler(new ApiLoginHandler());
         });
+
+        http.addFilterBefore(new JwtValidFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
